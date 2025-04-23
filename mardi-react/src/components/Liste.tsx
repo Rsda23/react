@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchTodos } from '../services/todoService';
 import { deleteTodo } from '../services/todoService';
 import { Todo as TodoType } from '../types/todo';
+import { Link } from 'react-router';
 
 export default function List(){
     const [todos, setTodos] = useState<TodoType[]>([]);
@@ -59,6 +60,41 @@ export default function List(){
                         </div>
                     </div>
                 ))}
+            </div>
+            <div className="mt-5 mb-5">
+                <Link to="/addTodo">
+                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
+                        Aller à AddTodo.tsx
+                    </button>
+                </Link>
+            </div>
+            <div className="mt-5 mb-5">
+                <Link to="/login">
+                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
+                        Aller à Login.tsx
+                    </button>
+                </Link>
+            </div>
+            <div className="mt-5 mb-5">
+                <Link to="/logo">
+                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
+                        Aller à Logo.tsx
+                    </button>
+                </Link>
+            </div>
+            <div className="mt-5 mb-5">
+                <Link to="/tests">
+                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
+                        Aller à Test.tsx
+                    </button>
+                </Link>
+            </div>
+            <div className="mt-5 mb-5">
+                <Link to="/welcome">
+                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
+                        Aller à Welcome.tsx
+                    </button>
+                </Link>
             </div>
         </div>
     )
