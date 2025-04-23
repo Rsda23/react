@@ -1,13 +1,14 @@
 import './App.css'
 import Tests from './components/Tests';
-import Todo  from './components/Todo';
+import AddTodo from './components/AddTodo'
 import Welcome from './components/Welcome';
 import Logo  from './components/Logo';
+import List from './components/Liste';
 
 function App() {
 
   return (
-    <div className="w-full max-w-md">
+    <div className='w-full overflow-x-hidden'>
       <div>
         <Welcome/>
       </div>
@@ -18,7 +19,10 @@ function App() {
         <Tests />
       </div>
       <div>
-        <Todo />
+        <AddTodo />
+      </div>
+      <div>
+        <List/>
       </div>
     </div>
   )

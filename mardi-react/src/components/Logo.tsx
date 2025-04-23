@@ -3,7 +3,7 @@ import viteLogo from '/vite.svg';
 
 export default function Logo() {
     return (
-      <div className="w-full max-w-md">
+      <div className="max-w-md mx-auto mt-10 px-4">
         <p className="mt-5 bg-fuchsia-950">components Logo.tsx :</p>
         <div className="flex justify-center gap-6 mt-4">
           <a href="https://vite.dev" target="_blank">
