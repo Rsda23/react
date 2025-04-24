@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createTodo } from '../services/todoService';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 
 export default function AddTodo(){
@@ -11,10 +11,14 @@ export default function AddTodo(){
     const [dueDate, setDueDate] = useState('');
     const [category, setCategory] = useState('');
     const [tags, setTags] = useState<string[]>([]);
+    const navigate = useNavigate();
 
-    const handleSubmit = async () => {
-        if (!title || !dueDate) return;
-      
+    const handleAdd = async () => {
+        if (!title || !dueDate){
+            alert ("Le titre et la date sont obligatoires")
+            return;
+        }
+        
         const newTodo = {
           title,
           description,
@@ -27,7 +31,10 @@ export default function AddTodo(){
       
         try {
           await createTodo(newTodo);
+          alert("Ajout effectué");
+          navigate("/list");
         } catch (err) {
+        alert("Erreur ajout todo");
           console.error('Erreur ajout todo :', err);
         }
       };
@@ -77,7 +84,7 @@ export default function AddTodo(){
                 </div>
 
                 <div className="flex justify-center mt-6">
-                    <button onClick={handleSubmit} className="hover:text-fuchsia-500 bg-black text-white px-6 py-2 rounded hover:bg-whitetransition-all">
+                    <button onClick={handleAdd} className="hover:text-fuchsia-500 bg-black text-white px-6 py-2 rounded hover:bg-whitetransition-all">
                     Ajouter
                     </button>
                 </div>
