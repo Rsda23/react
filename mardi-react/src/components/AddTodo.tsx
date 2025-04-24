@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createTodo } from '../services/todoService';
 import { Link, useNavigate } from 'react-router';
+import InputField from './InputField';
 
 export default function AddTodo() {
   const [formData, setFormData] = useState<{
@@ -63,72 +64,45 @@ export default function AddTodo() {
         <h2 className="mb-6 text-center text-2xl font-bold">
           Ajouter une todo
         </h2>
-
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-semibold">Titre</label>
-            <input
-              name="title"
-              className="rounded border p-2 text-white"
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-semibold">Description</label>
-            <input
-              name="description"
-              className="rounded border p-2 text-white"
-              value={formData.description}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-semibold">Priorité</label>
-            <input
-              name="priority"
-              className="rounded border p-2 text-white"
-              value={formData.priority}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-semibold">Date</label>
-            <input
-              name="dueDate"
-              className="rounded border p-2 text-white"
-              type="date"
-              value={formData.dueDate}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-semibold">Catégorie</label>
-            <input
-              name="category"
-              className="rounded border p-2 text-white"
-              value={formData.category}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-semibold">
-              Tags (virgule pour séparer)
-            </label>
-            <input
-              name="tags"
-              className="rounded border p-2 text-white"
-              value={formData.tags.join(',')}
-              onChange={handleChange}
-            />
-          </div>
+          <InputField
+            label="Titre"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+          />
+          <InputField
+            label="Description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+          />
+          <InputField
+            label="Priorité"
+            name="priority"
+            value={formData.priority}
+            onChange={handleChange}
+          />
+          <InputField
+            label="Date"
+            name="dueDate"
+            value={formData.dueDate}
+            onChange={handleChange}
+            type="date"
+          />
+          <InputField
+            label="Catégorie"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+          />
+          <InputField
+            label="Tags (virgule pour séparer)"
+            name="tags"
+            value={formData.tags.join(',')}
+            onChange={handleChange}
+          />
         </div>
-
         <div className="mt-6 flex justify-center">
           <button
             onClick={handleAdd}
