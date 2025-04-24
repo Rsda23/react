@@ -3,7 +3,7 @@ import Tests from './components/Tests';
 import AddTodo from './components/AddTodo/AddTodo';
 import Welcome from './components/Welcome';
 import Logo from './components/Logo';
-import List from './components/Liste';
+import List from './components/List';
 import Login from './components/Login';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
