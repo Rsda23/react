@@ -27,6 +27,13 @@ export default function List(){
 
     return(
         <div>
+            <div className="mt-5 mb-5">
+                <Link to="/logo">
+                <button className="flex items-center gap-1 text-sm text-white px-3 py-1.5 rounded border border-white hover:text-fuchsia-500 hover:border-fuchsia-500 transition-all">
+                    <span className="text-lg mr-1">←</span> Retour
+                </button>
+                </Link>
+            </div>
             <div className="max-w-md mx-auto mt-10 px-4">
                 <p className="mt-5 bg-fuchsia-950 mb-3">components Liste.tsx :</p>
             </div>
@@ -62,38 +69,10 @@ export default function List(){
                 ))}
             </div>
             <div className="mt-5 mb-5">
-                <Link to="/addTodo">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à AddTodo.tsx
-                    </button>
-                </Link>
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/login">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Login.tsx
-                    </button>
-                </Link>
-            </div>
-            <div className="mt-5 mb-5">
                 <Link to="/logo">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Logo.tsx
-                    </button>
-                </Link>
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/tests">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Test.tsx
-                    </button>
-                </Link>
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/welcome">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Welcome.tsx
-                    </button>
+                <button className="flex items-center gap-1 text-sm text-white px-3 py-1.5 rounded border border-white hover:text-fuchsia-500 hover:border-fuchsia-500 transition-all">
+                    <span className="text-lg mr-1">←</span> Retour
+                </button>
                 </Link>
             </div>
         </div>

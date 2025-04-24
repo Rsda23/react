@@ -33,6 +33,13 @@ export default function AddTodo(){
       };
       return (
         <div className="max-w-md mx-auto mt-10 px-4">
+            <div className="mt-5 mb-5">
+                <Link to="/logo">
+                <button className="flex items-center gap-1 text-sm text-white px-3 py-1.5 rounded border border-white hover:text-fuchsia-500 hover:border-fuchsia-500 transition-all">
+                    <span className="text-lg mr-1">←</span> Retour
+                </button>
+                </Link>
+            </div>
             <p className="mt-5 bg-fuchsia-950 mb-8">components AddTodo.tsx :</p>
             <div className="max-w-xl mx-auto border p-6 rounded-2xl">
                 <h2 className="text-2xl font-bold text-center mb-6">Ajouter une todo</h2>
@@ -70,45 +77,10 @@ export default function AddTodo(){
                 </div>
 
                 <div className="flex justify-center mt-6">
-                    <button onClick={handleSubmit} className="bg-black text-white px-6 py-2 rounded hover:bg-white hover:text-black transition-all">
+                    <button onClick={handleSubmit} className="hover:text-fuchsia-500 bg-black text-white px-6 py-2 rounded hover:bg-whitetransition-all">
                     Ajouter
                     </button>
                 </div>
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/login">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Login.tsx
-                    </button>
-                </Link>
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/list">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Liste.tsx
-                    </button>
-                </Link>
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/logo">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Logo.tsx
-                    </button>
-                </Link>
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/tests">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Test.tsx
-                    </button>
-                </Link>
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/welcome">
-                    <button className="bg-purple-600 text-white px-4 py-2 rounded hover:text-fuchsia-700">
-                        Aller à Welcome.tsx
-                    </button>
-                </Link>
             </div>
         </div>
       );

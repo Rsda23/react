@@ -5,11 +5,13 @@ import Welcome from './components/Welcome';
 import Logo  from './components/Logo';
 import List from './components/Liste';
 import Login from './components/Login';
+import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
 
 function App() {
 
   return (
+    <AuthProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
@@ -21,6 +23,7 @@ function App() {
         <Route path="/tests" element={<Tests />} />
       </Routes>
     </Router>
+    </AuthProvider>
   )
 }
 
