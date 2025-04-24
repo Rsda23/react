@@ -12,3 +12,10 @@ https://react.dev/learn
 
 configuratiion d'axios : 
 https://axios-http.com/docs/intro
+
+Identifiant de connexion :
+Identifiant : azerty
+Mot de passe : 123456
+
+components tailwind : 
+https://preline.co/docs/toggle-password.html
