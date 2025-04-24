@@ -4,77 +4,82 @@ import { deleteTodo } from '../services/todoService';
 import { Todo as TodoType } from '../types/todo';
 import { Link } from 'react-router';
 
-export default function List(){
-    const [todos, setTodos] = useState<TodoType[]>([]);
-      useEffect(() => {
-        fetchTodos()
-          .then(res =>
-             setTodos(res.data))
-          .catch(err => console.error('Erreur :', err));
-      }, []);
+export default function List() {
+  const [todos, setTodos] = useState<TodoType[]>([]);
+  useEffect(() => {
+    fetchTodos()
+      .then((res) => setTodos(res.data))
+      .catch((err) => console.error('Erreur :', err));
+  }, []);
 
-      const handleDelete = async (_id: string) => {
-        const confirmDelete = window.confirm('Supprimer cette tâche ?');
-        if (!confirmDelete) return;
-      
-        try {
-          await deleteTodo(_id);
-          setTodos((prev) => prev.filter((todo) => todo._id !== _id));
-        } catch (err) {
-          console.error('Erreur lors de la suppression :', err);
-        }
-      };
+  const handleDelete = async (_id: string) => {
+    const confirmDelete = window.confirm('Supprimer cette tâche ?');
+    if (!confirmDelete) return;
 
-    return(
-        <div>
-            <div className="mt-5 mb-5">
-                <Link to="/logo">
-                <button className="flex items-center gap-1 text-sm text-white px-3 py-1.5 rounded border border-white hover:text-fuchsia-500 hover:border-fuchsia-500 transition-all">
-                    <span className="text-lg mr-1">←</span> Retour
-                </button>
-                </Link>
+    try {
+      await deleteTodo(_id);
+      setTodos((prev) => prev.filter((todo) => todo._id !== _id));
+    } catch (err) {
+      console.error('Erreur lors de la suppression :', err);
+    }
+  };
+
+  return (
+    <div>
+      <div className="mt-5 mb-5">
+        <Link to="/logo">
+          <button className="flex items-center gap-1 rounded border border-white px-3 py-1.5 text-sm text-white transition-all hover:border-fuchsia-500 hover:text-fuchsia-500">
+            <span className="mr-1 text-lg">←</span> Retour
+          </button>
+        </Link>
+      </div>
+      <div className="mx-auto mt-10 max-w-md px-4">
+        <p className="mt-5 mb-3 bg-fuchsia-950">components Liste.tsx :</p>
+      </div>
+      <h1 className="mb-5">Liste des Todos</h1>
+
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {todos.map((todo) => (
+          <div
+            key={todo._id}
+            className="relative mb-5 rounded-4xl border border-fuchsia-800 bg-fuchsia-950 p-5 text-white shadow-md"
+          >
+            <button
+              onClick={() => handleDelete(todo._id)}
+              className="absolute top-4 right-4 flex h-5 w-0 items-center justify-center text-white"
+            >
+              ×
+            </button>
+            <p className="mb-2 text-lg font-bold">ID : {todo._id}</p>
+
+            <p className="mb-1 font-bold">{todo.title}</p>
+
+            <p className="mb-2 text-sm">{todo.description}</p>
+
+            <p className="text-md mb-1">
+              Complété : {todo.completed ? 'Oui' : 'Non'}
+            </p>
+
+            <p className="text-md mb-1">Priorité : {todo.priority}</p>
+
+            <p className="text-md mb-1">Date : {todo.dueDate}</p>
+
+            <p className="text-md mb-1">Catégorie : {todo.category}</p>
+
+            <p className="text-md mt-5 mb-1 font-bold">Tags :</p>
+            <div className="flex justify-center gap-2">
+              {todo.tags?.map((tag, index) => <p key={index}>{tag}</p>)}
             </div>
-            <div className="max-w-md mx-auto mt-10 px-4">
-                <p className="mt-5 bg-fuchsia-950 mb-3">components Liste.tsx :</p>
-            </div>
-            <h1 className='mb-5'>Liste des Todos</h1>
-
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5'>
-                {todos.map((todo) => (
-                    <div key={todo._id} className="relative border border-fuchsia-800 rounded-4xl p-5 mb-5 bg-fuchsia-950 text-white shadow-md">
-                        <button onClick={() => handleDelete(todo._id)} className="absolute top-4 right-4 text-white  w-0 h-5 flex items-center justify-center ">
-                            ×
-                        </button>
-                        <p className="font-bold text-lg mb-2">ID : {todo._id}</p>
-                        
-                        <p className="font-bold mb-1">{todo.title}</p>
-
-                        <p className="text-sm mb-2">{todo.description}</p>
-
-                        <p className="text-md mb-1">Complété : {todo.completed ? "Oui" : "Non"}</p>
-
-                        <p className="text-md mb-1">Priorité : {todo.priority}</p>
-
-                        <p className="text-md mb-1">Date : {todo.dueDate}</p>
-
-                        <p className="text-md mb-1">Catégorie : {todo.category}</p>
-
-                        <p className="text-md font-bold mb-1 mt-5">Tags :</p>
-                        <div className="flex gap-2 justify-center">
-                            {todo.tags?.map((tag, index) => (
-                                <p key={index}>{tag}</p>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div className="mt-5 mb-5">
-                <Link to="/logo">
-                <button className="flex items-center gap-1 text-sm text-white px-3 py-1.5 rounded border border-white hover:text-fuchsia-500 hover:border-fuchsia-500 transition-all">
-                    <span className="text-lg mr-1">←</span> Retour
-                </button>
-                </Link>
-            </div>
-        </div>
-    )
+          </div>
+        ))}
+      </div>
+      <div className="mt-5 mb-5">
+        <Link to="/logo">
+          <button className="flex items-center gap-1 rounded border border-white px-3 py-1.5 text-sm text-white transition-all hover:border-fuchsia-500 hover:text-fuchsia-500">
+            <span className="mr-1 text-lg">←</span> Retour
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
 }

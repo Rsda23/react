@@ -36,15 +36,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, []);
 
-  const login = async (username: string, password: string): Promise<boolean> => {
+  const login = async (
+    username: string,
+    password: string,
+  ): Promise<boolean> => {
     // Simulation d'une API d'authentification
     // Dans un vrai scénario, vous appelleriez votre backend ici
     return new Promise((resolve) => {
       setTimeout(() => {
         // Mock de validation simple (en production, utilisez une vraie validation)
-        console.log("username avant le if:", `"${username.trim()}"`);
-        console.log("password avant le if:", `"${password}"`);
-        if (username.trim() === "azerty" && password === "123456") {
+        console.log('username avant le if:', `"${username.trim()}"`);
+        console.log('password avant le if:', `"${password}"`);
+        if (username.trim() === 'azerty' && password === '123456') {
           const newUser = { id: 1, username };
           setUser(newUser);
           setIsAuthenticated(true);
