@@ -3,33 +3,44 @@ import { createTodo } from '../services/todoService';
 import { Link, useNavigate } from 'react-router';
 
 export default function AddTodo() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const completed = false;
-  const [priority, setPriority] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [category, setCategory] = useState('');
-  const [tags, setTags] = useState<string[]>([]);
+  const [formData, setFormData] = useState<{
+    title: string;
+    description: string;
+    completed: boolean;
+    priority: string;
+    dueDate: string;
+    category: string;
+    tags: string[];
+  }>({
+    title: '',
+    description: '',
+    completed: false,
+    priority: '',
+    dueDate: '',
+    category: '',
+    tags: [],
+  });
+
   const navigate = useNavigate();
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'tags' ? value.split(',') : value,
+    }));
+  };
+
   const handleAdd = async () => {
+    const { title, dueDate } = formData;
+
     if (!title || !dueDate) {
       alert('Le titre et la date sont obligatoires');
       return;
     }
 
-    const newTodo = {
-      title,
-      description,
-      completed,
-      priority,
-      dueDate,
-      category,
-      tags,
-    };
-
     try {
-      await createTodo(newTodo);
+      await createTodo(formData);
       alert('Ajout effectué');
       navigate('/list');
     } catch (err) {
@@ -37,6 +48,7 @@ export default function AddTodo() {
       console.error('Erreur ajout todo :', err);
     }
   };
+
   return (
     <div className="mx-auto mt-10 max-w-md px-4">
       <div className="mt-5 mb-5">
@@ -56,46 +68,51 @@ export default function AddTodo() {
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-semibold">Titre</label>
             <input
+              name="title"
               className="rounded border p-2 text-white"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={formData.title}
+              onChange={handleChange}
             />
           </div>
 
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-semibold">Description</label>
             <input
+              name="description"
               className="rounded border p-2 text-white"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={formData.description}
+              onChange={handleChange}
             />
           </div>
 
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-semibold">Priorité</label>
             <input
+              name="priority"
               className="rounded border p-2 text-white"
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
+              value={formData.priority}
+              onChange={handleChange}
             />
           </div>
 
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-semibold">Date</label>
             <input
+              name="dueDate"
               className="rounded border p-2 text-white"
               type="date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
+              value={formData.dueDate}
+              onChange={handleChange}
             />
           </div>
 
           <div className="flex flex-col">
             <label className="mb-1 text-sm font-semibold">Catégorie</label>
             <input
+              name="category"
               className="rounded border p-2 text-white"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              value={formData.category}
+              onChange={handleChange}
             />
           </div>
 
@@ -104,9 +121,10 @@ export default function AddTodo() {
               Tags (virgule pour séparer)
             </label>
             <input
+              name="tags"
               className="rounded border p-2 text-white"
-              value={tags.join(',')}
-              onChange={(e) => setTags(e.target.value.split(','))}
+              value={formData.tags.join(',')}
+              onChange={handleChange}
             />
           </div>
         </div>
