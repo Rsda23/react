@@ -1,6 +1,6 @@
 import './App.css';
 import Tests from './components/Tests';
-import AddTodo from './components/AddTodo';
+import AddTodo from './components/AddTodo/AddTodo';
 import Welcome from './components/Welcome';
 import Logo from './components/Logo';
 import List from './components/Liste';

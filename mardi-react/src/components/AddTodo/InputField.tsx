@@ -8,13 +8,13 @@ type InputFieldProps = {
   type?: string;
 };
 
-export default function InputField({
+export const InputField = ({
   label,
   name,
   value,
   onChange,
   type = 'text',
-}: InputFieldProps) {
+}: InputFieldProps) => {
   return (
     <div className="flex flex-col">
       <label className="mb-1 text-sm font-semibold">{label}</label>
@@ -27,4 +27,4 @@ export default function InputField({
       />
     </div>
   );
-}
+};
