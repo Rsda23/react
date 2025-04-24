@@ -1,28 +1,34 @@
-import { useEffect, useState } from 'react';
-import { fetchTodos } from '../services/todoService';
-import { deleteTodo } from '../services/todoService';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchTodos, deleteTodo } from '../services/todoService';
 import { Todo as TodoType } from '../types/todo';
 import { Link } from 'react-router';
 
 export default function List() {
-  const [todos, setTodos] = useState<TodoType[]>([]);
-  useEffect(() => {
-    fetchTodos()
-      .then((res) => setTodos(res.data))
-      .catch((err) => console.error('Erreur :', err));
-  }, []);
+  const queryClient = useQueryClient();
 
-  const handleDelete = async (_id: string) => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['todos'],
+    queryFn: fetchTodos,
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
+    },
+  });
+
+  const handleDelete = (_id: string) => {
     const confirmDelete = window.confirm('Supprimer cette tâche ?');
-    if (!confirmDelete) return;
-
-    try {
-      await deleteTodo(_id);
-      setTodos((prev) => prev.filter((todo) => todo._id !== _id));
-    } catch (err) {
-      console.error('Erreur lors de la suppression :', err);
+    if (confirmDelete) {
+      deleteMutation.mutate(_id);
     }
   };
+
+  if (isLoading) return <p>Chargement...</p>;
+  if (error) return <p>Erreur lors du chargement des todos.</p>;
+
+  const todos: TodoType[] = data?.data ?? [];
 
   return (
     <div>
@@ -51,34 +57,20 @@ export default function List() {
               ×
             </button>
             <p className="mb-2 text-lg font-bold">ID : {todo._id}</p>
-
             <p className="mb-1 font-bold">{todo.title}</p>
-
             <p className="mb-2 text-sm">{todo.description}</p>
-
             <p className="text-md mb-1">
               Complété : {todo.completed ? 'Oui' : 'Non'}
             </p>
-
             <p className="text-md mb-1">Priorité : {todo.priority}</p>
-
             <p className="text-md mb-1">Date : {todo.dueDate}</p>
-
             <p className="text-md mb-1">Catégorie : {todo.category}</p>
-
             <p className="text-md mt-5 mb-1 font-bold">Tags :</p>
             <div className="flex justify-center gap-2">
               {todo.tags?.map((tag, index) => <p key={index}>{tag}</p>)}
             </div>
           </div>
         ))}
-      </div>
-      <div className="mt-5 mb-5">
-        <Link to="/logo">
-          <button className="flex items-center gap-1 rounded border border-white px-3 py-1.5 text-sm text-white transition-all hover:border-fuchsia-500 hover:text-fuchsia-500">
-            <span className="mr-1 text-lg">←</span> Retour
-          </button>
-        </Link>
       </div>
     </div>
   );
